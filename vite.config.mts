@@ -60,6 +60,7 @@ export default defineConfig(({mode}) => {
           // Overwrite default Vite output fileName
           entryFileNames: mode === 'development' ? 'main.js' : 'main.js',
           assetFileNames: mode === 'development' ? 'styles.css' : 'styles.css',
+
         },
         external: [
           'obsidian',
