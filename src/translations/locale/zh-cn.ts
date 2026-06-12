@@ -1,0 +1,72 @@
+export default {
+  // setting.ts
+  welcome: '欢迎使用大日历',
+  'Open big calendar successfully': '成功打开大日历',
+  'Open big calendar': '打开大日历',
+  Sunday: '星期日',
+  Monday: '星期一',
+  'Regular Options': '常规选项',
+  'First Day of Week': '一周开始',
+  'Choose the first day of the week. Sunday is the default.': '选择一周的开始日期。默认为星期日。',
+  'Insert after heading': '在指定标题后插入事件',
+  'You should set the same heading below if you want to insert and process events below the same heading.':
+    '你如果想要插入标题的同时显示对应标题下的事件，你必须保证当前设置与下方的解析设置是一致的。当为空时插入到文末',
+  'Process Events below': '解析指定标题后的事件',
+  'Only entries below this string/section in your notes will be processed. If it does not exist no notes will be processed for that file.':
+    '只有在设置的标题后的事件 才会被解析。当为空时解析全文的事件',
+  'Visible start time': '日历开始时间',
+  'Earliest time shown in week and day views.': '周视图和日视图中显示的最早时间。',
+  'Visible end time': '日历结束时间',
+  'Latest time shown in week and day views.': '周视图和日视图中显示的最晚时间。',
+  'Experimental Options': '实验性选项',
+  'Set default event composition, you should use {TIME} as "HH:mm" and {CONTENT} as content. "{TIME} {CONTENT}" by default':
+    '设置默认事件组成，你可以使用 {TIME} 作为 "HH:mm" 和 {CONTENT} 作为内容。默认为 "{TIME} {CONTENT}"',
+  'Default Event Composition': '默认事件组成',
+  'Say Thank You': 'Say Thank You',
+  Donate: '捐赠',
+  'If you like this plugin, consider donating to support continued development:':
+    '如果你喜欢这个插件，而且也希望给我买鸡腿，那么可以考虑 Github 页面右边的 Sponsor~',
+  'Close big calendar successfully': '成功关闭大日历',
+  'Your daily notes folder is not set correctly. Please check your settings.':
+    '你的日记笔记文件夹设置不正确。请检查你的设置。',
+  'Select a date': '选择一个日期',
+  Today: '今天',
+  Cancel: '取消',
+  'Go to date': '跳转到日期',
+
+  'Content Regex': '内容正则表达式',
+
+  // Filter Component
+  'Enter regex pattern': '输入正则表达式模式',
+  'Event Type': '事件类型',
+  All: '全部',
+  'Not Tagged': '未标记',
+  Linked: '已链接',
+  Imaged: '图像',
+  Connected: '已连接',
+  'Clear Filters': '清除过滤器',
+  Filter: '过滤器',
+
+  // Task Types
+  'Task - Todo': '任务 - 待办',
+  'Task - Done': '任务 - 完成',
+  'Task - Cancelled': '任务 - 取消',
+  'Task - Forwarded': '任务 - 转发',
+  'Task - Deferred': '任务 - 延期',
+  'Task - In Progress': '任务 - 进行中',
+  'Task - Question': '任务 - 问题',
+  'Task - Add': '任务 - 添加',
+  'Task - Reviewed': '任务 - 已审阅',
+  'Task - Important': '任务 - 重要',
+  'Task - Info': '任务 - 信息',
+  'Task - Bookmark': '任务 - 书签',
+  'Task - Pro': '任务 - 赞成',
+  'Task - Con': '任务 - 反对',
+  'Task - Brainstorming': '任务 - 头脑风暴',
+  'Task - Example': '任务 - 示例',
+  'Task - Quote': '任务 - 引用',
+  'Task - Note': '任务 - 笔记',
+  'Task - Win': '任务 - 赢',
+  'Task - Lose': '任务 - 输',
+  Default: '默认',
+};

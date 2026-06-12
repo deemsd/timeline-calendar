@@ -1,0 +1,115 @@
+/* Keep custom density/layout rules after react-big-calendar and event styles. */
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-agenda-date-cell {
+  width: 7.2em;
+  min-width: 7.2em;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-agenda-date-cell,
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-agenda-date-cell * {
+  white-space: nowrap;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .event-time {
+  display: none;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-timeslot-group {
+  min-height: 33px;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-event {
+  min-height: 10px;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .bc-all-day-task {
+  min-height: 18px;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-event {
+  padding: 0 1px;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-event-content {
+  padding: 0 var(--size-2-1) !important;
+  line-height: 1;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .event-type-marker {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .event-type-marker input[type='checkbox'] {
+  width: 12px;
+  height: 12px;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-events .rbc-row {
+  min-height: 24px;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-events .rbc-row-segment {
+  height: 26px;
+  padding: 1px;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-events .rbc-event,
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-events .bc-all-day-task {
+  height: 24px;
+  min-height: 24px;
+  max-height: 24px;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .rbc-row {
+  min-height: 29px !important;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .rbc-row-segment {
+  height: 29px !important;
+  padding: 1px !important;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .rbc-event,
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .bc-all-day-task {
+  display: flex !important;
+  align-items: center !important;
+  height: 27px !important;
+  min-height: 27px !important;
+  max-height: 27px !important;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .rbc-event-content {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  line-height: 27px !important;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .rbc-row-content {
+  pointer-events: none;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .rbc-event,
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .rbc-show-more,
+.workspace-leaf-content[data-type='timeline-calendar'] .rbc-time-view .rbc-allday-cell .rbc-button-link {
+  pointer-events: auto;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .calendar-view-week .rbc-day-slot .rbc-event,
+.workspace-leaf-content[data-type='timeline-calendar'] .calendar-view-day .rbc-day-slot .rbc-event,
+.workspace-leaf-content[data-type='timeline-calendar'] .calendar-view-week .rbc-day-slot .rbc-background-event,
+.workspace-leaf-content[data-type='timeline-calendar'] .calendar-view-day .rbc-day-slot .rbc-background-event {
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.workspace-leaf-content[data-type='timeline-calendar'] .calendar-view-week .rbc-day-slot .rbc-event.rbc-event-overlaps,
+.workspace-leaf-content[data-type='timeline-calendar'] .calendar-view-day .rbc-day-slot .rbc-event.rbc-event-overlaps {
+  box-shadow: none !important;
+}

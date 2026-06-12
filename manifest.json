@@ -1,0 +1,9 @@
+{
+  "id": "timeline-calendar",
+  "name": "Timeline Calendar",
+  "description": "A clean timeline calendar with grid-aligned time labels.",
+  "version": "1.5.1",
+  "author": "deemsd",
+  "isDesktopOnly": false,
+  "minAppVersion": "1.7.2"
+}

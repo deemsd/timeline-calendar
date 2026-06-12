@@ -1,0 +1,11 @@
+node_modules/
+dist/
+data.json
+.vscode/
+*.code-workspace
+desktop.ini
+.DS_Store
+
+main.js
+styles.css
+
