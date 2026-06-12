@@ -4,7 +4,7 @@ import {Notice} from 'obsidian';
 import CalendarComponent, {EventRefActions} from '@/component/Calendar/Calendar';
 import {SlotInfo} from 'react-big-calendar';
 import {showEventInDailyNotes} from '@/obComponents/showEvent';
-import {useApp, useEvents} from '@/hooks/useStore';
+import {useApp} from '@/hooks/useStore';
 import useCalendarStore from '@/stores/calendarStore';
 import useGlobalStateStore from '@/stores/globalStateStore';
 import {EventCreateResult} from '@/obComponents/EventCreatePrompt';

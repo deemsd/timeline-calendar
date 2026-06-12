@@ -83,7 +83,7 @@ export class Recurrence {
           dueDate,
         });
       }
-    } catch (error) {
+    } catch {
       // Could not read recurrence rule. User possibly not done typing.
     }
 

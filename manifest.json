@@ -2,7 +2,7 @@
   "id": "timeline-calendar",
   "name": "Timeline Calendar",
   "description": "A clean timeline calendar with grid-aligned time labels.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "deemsd",
   "isDesktopOnly": false,
   "minAppVersion": "1.7.2"

@@ -23,8 +23,7 @@ import EventComponent from './EventComponent';
 import noOverlapNoHorizontalGap from '@/utils/dayLayoutAlgorithm';
 
 
-import {useView} from '@/hooks/useView';
-import {t} from '@/translations/helper';
+
 
 export interface EventRefActions {
   updateEvents: (events: Model.Event[]) => void;

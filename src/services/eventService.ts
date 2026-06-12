@@ -136,7 +136,7 @@ class EventService {
         try {
           const regex = new RegExp(filterCriteria.contentRegex);
           filteredEvents = filteredEvents.filter((event) => regex.test(event.title));
-        } catch (error) {
+        } catch {
           console.error('Invalid regex pattern:', filterCriteria.contentRegex);
         }
       }
