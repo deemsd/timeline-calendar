@@ -1,6 +1,6 @@
 {
   "name": "obsidian-timeline-calendar",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A clean timeline calendar with grid-aligned time labels.",
   "author": "deemsd",
   "main": "main.js",

@@ -54,7 +54,7 @@ const WEEKDAY_LABELS = ['周日', '周一', '周二', '周三', '周四', '周�
 
 class StableMonthView extends MonthView {
   private _mounted = false;
-  private _resizeTimer: ReturnType<typeof setTimeout> | null = null;
+  private _resizeTimer: ReturnType<typeof window.setTimeout> | null = null;
   private _resizeObserver: ResizeObserver | null = null;
 
   constructor(props: Record<string, unknown>) {
@@ -67,17 +67,17 @@ class StableMonthView extends MonthView {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    if (super.componentDidMount) super.componentDidMount();
+    super.componentDidMount();
     this._mounted = true;
     // Compute immediately (synchronous in componentDidMount avoids flash)
     this._computeRowLimit();
     // Observe container resize (screen switch, panel resize)
-    const container = document.querySelector('.rbc-month-view');
+    const activeDoc = this.containerRef.current?.ownerDocument ?? activeDocument;
+    const container = activeDoc.querySelector('.rbc-month-view');
     if (container) {
       this._resizeObserver = new ResizeObserver(() => {
-        if (this._resizeTimer) clearTimeout(this._resizeTimer);
-        this._resizeTimer = setTimeout(() => {
+        if (this._resizeTimer) window.clearTimeout(this._resizeTimer);
+        this._resizeTimer = window.setTimeout(() => {
           if (this._mounted) this._computeRowLimit();
         }, 150);
       });
@@ -86,14 +86,13 @@ class StableMonthView extends MonthView {
   }
 
   componentWillUnmount() {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    if (super.componentWillUnmount) super.componentWillUnmount();
+    super.componentWillUnmount();
     this._mounted = false;
     if (this._resizeObserver) {
       this._resizeObserver.disconnect();
       this._resizeObserver = null;
     }
-    if (this._resizeTimer) clearTimeout(this._resizeTimer);
+    if (this._resizeTimer) window.clearTimeout(this._resizeTimer);
   }
 
   private _computeRowLimit() {
@@ -103,14 +102,16 @@ class StableMonthView extends MonthView {
     const DATE_ROW_HEIGHT = 20;
     const EVENT_SEGMENT_HEIGHT = 23;
 
-    const monthView = document.querySelector('.rbc-month-view') as HTMLElement | null;
+    const activeDoc = this.containerRef.current?.ownerDocument ?? activeDocument;
+    const monthView = activeDoc.querySelector('.rbc-month-view');
     if (!monthView) {
       this.setState({rowLimit: MONTH_ROW_LIMIT, needLimitMeasure: false});
       return;
     }
     const totalHeight = monthView.getBoundingClientRect().height;
     // Weekday header row (周日/周一/...)
-    const headerRow = monthView.querySelector('.rbc-month-header') as HTMLElement | null;
+    const headerCandidate = monthView.querySelector('.rbc-month-header');
+    const headerRow = headerCandidate instanceof HTMLElement ? headerCandidate : null;
     const headerHeight = headerRow ? headerRow.getBoundingClientRect().height : 20;
     // Number of week rows
     const weekRows = monthView.querySelectorAll('.rbc-month-row');
