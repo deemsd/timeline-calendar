@@ -83,9 +83,9 @@ export default class EventEditModal extends Modal {
         });
       });
 
-    // Start date and time
+    // Start time
     new Setting(formContainer)
-      .setName('Start Date')
+      .setName('Start Time')
       .setDesc('When the event starts')
       .addText((text) => {
         const dateString = moment(this.result.startDate).format('YYYY-MM-DD HH:mm');
@@ -97,9 +97,9 @@ export default class EventEditModal extends Modal {
         });
       });
 
-    // End date and time
+    // End time
     new Setting(formContainer)
-      .setName('End Date')
+      .setName('End Time')
       .setDesc('When the event ends')
       .addText((text) => {
         const dateString = moment(this.result.endDate).format('YYYY-MM-DD HH:mm');

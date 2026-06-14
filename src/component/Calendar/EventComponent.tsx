@@ -208,7 +208,7 @@ const EventComponent: React.FC<EventProps<Event>> = ({
     // Add start date if available
     if (event.start) {
       const startDate = new Date(event.start);
-      dateInfo += ` 🛫 ${moment(startDate).format('YYYY-MM-DD')}`;
+      dateInfo += ` 📅 ${moment(startDate).format('YYYY-MM-DD')}`;
     }
 
     // Add end date if available and different from start date
@@ -222,7 +222,7 @@ const EventComponent: React.FC<EventProps<Event>> = ({
         startDate.toDateString() !== endDate.toDateString() ||
         (event.allDay && endDate.getTime() - startDate.getTime() > 86400000) // More than one day
       ) {
-        dateInfo += ` 📅 ${moment(endDate).format('YYYY-MM-DD')}`;
+        dateInfo += ` → 📅 ${moment(endDate).format('YYYY-MM-DD')}`;
       }
     }
 

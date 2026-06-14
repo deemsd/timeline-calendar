@@ -453,8 +453,8 @@ function cleanEventContent(originalContent: string, content: string): string {
   cleanContent = cleanContent.replace(/📅\s?\d{4}-\d{2}-\d{2}/g, '').trim();
   // Remove any existing done date patterns (✅)
   cleanContent = cleanContent.replace(/✅\s?\d{4}-\d{2}-\d{2}/g, '').trim();
-  // Remove any time range patterns (HH:MM-HH:MM at the end of content)
-  cleanContent = cleanContent.replace(/\s\d{1,2}:\d{2}-\d{1,2}:\d{2}/g, '').trim();
+  // Remove any time range patterns (HH:MM-HH:MM, with or without leading space)
+  cleanContent = cleanContent.replace(/\s?\d{1,2}:\d{2}-\d{1,2}:\d{2}/g, '').trim();
   // Remove start date emoji
   cleanContent = cleanContent.replace(/🛫\s?\d{4}-\d{2}-\d{2}/g, '').trim();
 
@@ -473,7 +473,7 @@ function cleanEventContent(originalContent: string, content: string): string {
       .trim()
       .replace(/🛫\s?\d{4}-\d{2}-\d{2}/g, '')
       .trim()
-      .replace(/\s\d{1,2}:\d{2}-\d{1,2}:\d{2}/g, '')
+      .replace(/\s?\d{1,2}:\d{2}-\d{1,2}:\d{2}/g, '')
       .trim();
   }
 

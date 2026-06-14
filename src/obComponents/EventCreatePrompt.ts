@@ -77,8 +77,8 @@ export default class EventCreatePrompt extends Modal {
 
     this.contentComponent = this.createInputField(mainContentContainer, this.placeholder, this.content);
 
-    // Start date and time
-    this.createDateTimePicker(mainContentContainer, 'Start date and time', this.startDate, (date) => {
+    // Start time
+    this.createDateTimePicker(mainContentContainer, 'Start time', this.startDate, (date) => {
       this.startDate = date;
 
       // If end time is before start time, update end time to start time + 1 hour
@@ -93,10 +93,10 @@ export default class EventCreatePrompt extends Modal {
       }
     });
 
-    // End date and time
+    // End time
     this.createDateTimePicker(
       mainContentContainer,
-      'End date and time',
+      'End time',
       this.endDate,
       (date) => {
         this.endDate = date;
