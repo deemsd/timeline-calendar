@@ -96,7 +96,7 @@ class StableMonthView extends MonthView {
 
   private _queryHTMLElement(parent: ParentNode, selector: string): HTMLElement | null {
     const element = parent.querySelector(selector);
-    return element instanceof HTMLElement ? element : null;
+    return element?.instanceOf(HTMLElement) ? element : null;
   }
 
   private _getMonthViewElement(): HTMLElement | null {
