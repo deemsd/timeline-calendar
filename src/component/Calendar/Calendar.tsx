@@ -60,9 +60,9 @@ class StableMonthView extends MonthView {
   constructor(props: Record<string, unknown>) {
     super(props);
     this.state = {
-      ...this.state,
       rowLimit: MONTH_ROW_LIMIT,
       needLimitMeasure: false,
+      date: null,
     };
   }
 
@@ -72,8 +72,7 @@ class StableMonthView extends MonthView {
     // Compute immediately (synchronous in componentDidMount avoids flash)
     this._computeRowLimit();
     // Observe container resize (screen switch, panel resize)
-    const activeDoc = this.containerRef.current?.ownerDocument ?? activeDocument;
-    const container = activeDoc.querySelector('.rbc-month-view');
+    const container = this._getMonthViewElement();
     if (container) {
       this._resizeObserver = new ResizeObserver(() => {
         if (this._resizeTimer) window.clearTimeout(this._resizeTimer);
@@ -95,6 +94,15 @@ class StableMonthView extends MonthView {
     if (this._resizeTimer) window.clearTimeout(this._resizeTimer);
   }
 
+  private _queryHTMLElement(parent: ParentNode, selector: string): HTMLElement | null {
+    const element = parent.querySelector(selector);
+    return element instanceof HTMLElement ? element : null;
+  }
+
+  private _getMonthViewElement(): HTMLElement | null {
+    return this._queryHTMLElement(activeDocument, '.rbc-month-view');
+  }
+
   private _computeRowLimit() {
     // Use known CSS constants to avoid unreliable DOM measurement
     // From Calendar.less: .rbc-row-content > .rbc-row:first-child = 20px (date number row)
@@ -102,16 +110,14 @@ class StableMonthView extends MonthView {
     const DATE_ROW_HEIGHT = 20;
     const EVENT_SEGMENT_HEIGHT = 23;
 
-    const activeDoc = this.containerRef.current?.ownerDocument ?? activeDocument;
-    const monthView = activeDoc.querySelector('.rbc-month-view');
+    const monthView = this._getMonthViewElement();
     if (!monthView) {
       this.setState({rowLimit: MONTH_ROW_LIMIT, needLimitMeasure: false});
       return;
     }
     const totalHeight = monthView.getBoundingClientRect().height;
     // Weekday header row (周日/周一/...)
-    const headerCandidate = monthView.querySelector('.rbc-month-header');
-    const headerRow = headerCandidate instanceof HTMLElement ? headerCandidate : null;
+    const headerRow = this._queryHTMLElement(monthView, '.rbc-month-header');
     const headerHeight = headerRow ? headerRow.getBoundingClientRect().height : 20;
     // Number of week rows
     const weekRows = monthView.querySelectorAll('.rbc-month-row');
@@ -226,7 +232,7 @@ const formatDateRange = (start: Date, end: Date) => {
   return `${startMoment.format('M月D日')}-${endMoment.format('M月D日')}`;
 };
 
-const CalendarComponent = forwardRef((props: CalendarProps, ref: React.ForwardedRef<EventRefActions>) => {
+const CalendarComponent = forwardRef((props: CalendarProps, _ref: React.ForwardedRef<EventRefActions>) => {
   const {
     selectable,
     resizeable,
