@@ -1,6 +1,6 @@
 import {TFile, normalizePath, Notice} from 'obsidian';
 import {moment} from 'obsidian';
-import {createDailyNote, getAllDailyNotes, getDailyNote} from 'obsidian-daily-notes-interface';
+import {getAllDailyNotes, getDailyNote} from 'obsidian-daily-notes-interface';
 import {insertAfterHandler} from './createEvent';
 import fileService from '../services/fileService';
 import {getAllLinesFromFile, getDailyNotePath, safeExecute} from '../api';
@@ -206,7 +206,7 @@ export async function restoreDeletedEvent(deletedEventid: string): Promise<Delet
     const existingFile = getDailyNote(date, dailyNotes);
 
     if (!existingFile) {
-      const file = await createDailyNote(date);
+      const file = await fileService.createDailyNote(date);
       const fileContents = await vault.read(file);
       const newFileContent = await insertAfterHandler('- ', newEvent, fileContents);
       await vault.modify(file, newFileContent.content);

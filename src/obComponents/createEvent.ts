@@ -1,5 +1,5 @@
 import {moment, TFile, Vault} from 'obsidian';
-import {createDailyNote, getAllDailyNotes, getDailyNote} from 'obsidian-daily-notes-interface';
+import {getAllDailyNotes, getDailyNote} from 'obsidian-daily-notes-interface';
 import {stringOrDate} from 'react-big-calendar';
 import {getAllLinesFromFile, safeExecute} from '@/api';
 import fileService from '@/services/fileService';
@@ -73,7 +73,7 @@ async function insertEventIntoNote(
 
   if (!existingFile) {
     // Create a new daily note if it doesn't exist
-    const file = await createDailyNote(startMoment);
+    const file = await fileService.createDailyNote(startMoment);
     const fileContents = await vault.read(file);
     const newFileContent = await insertAfterHandler(insertAfterSetting, formattedContent, fileContents);
     await vault.modify(file, newFileContent.content);

@@ -371,7 +371,7 @@ async function moveEventToNewDay(
 
   // If target daily note doesn't exist, create it
   if (!targetDailyNote) {
-    targetDailyNote = await fileService.createDailyNote(eventEndMoment);
+    targetDailyNote = await fileService.createDailyNote(eventStartMoment);
   }
 
   // Read original file content
