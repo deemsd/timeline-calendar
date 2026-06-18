@@ -21,6 +21,16 @@ export default {
   'Earliest time shown in week and day views.': 'Earliest time shown in week and day views.',
   'Visible end time': 'Visible end time',
   'Latest time shown in week and day views.': 'Latest time shown in week and day views.',
+  'Daily note creation': 'Daily note creation',
+  'Daily note base folder': 'Daily note base folder',
+  'Folder where new daily notes are created. Leave empty to use the Obsidian daily notes folder.':
+    'Folder where new daily notes are created. Leave empty to use the Obsidian daily notes folder.',
+  'Year folder format': 'Year folder format',
+  'Moment format for the year folder under the base folder.':
+    'Moment format for the year folder under the base folder.',
+  'Month folder format': 'Month folder format',
+  'Moment format for the month folder under the year folder.':
+    'Moment format for the month folder under the year folder.',
   'Experimental Options': 'Experimental Options',
   'Set default event composition, you should use {TIME} as "HH:mm" and {CONTENT} as content. "{TIME} {CONTENT}" by default':
     'Set default event composition, you should use {TIME} as "HH:mm" and {CONTENT} as content. "{TIME} {CONTENT}" by default',

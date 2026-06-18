@@ -5,6 +5,8 @@ import {
   getDailyNoteSettings,
   getTemplateInfo,
 } from 'obsidian-daily-notes-interface';
+import {DEFAULT_SETTINGS} from '@/setting';
+import globalService from '@/services/globalService';
 import {App, normalizePath, TFile} from 'obsidian';
 
 class FileService {
@@ -90,10 +92,15 @@ class FileService {
 
   private async getMonthlyDailyNotePath(date: moment.Moment): Promise<string> {
     const dailyNotesSetting = getDailyNoteSettings();
-    const baseFolder = normalizePath(dailyNotesSetting.folder || '');
-    const yearFolder = normalizePath(baseFolder ? `${baseFolder}/${date.format('YYYY')}` : date.format('YYYY'));
+    const pluginSettings = globalService.getState().pluginSetting || DEFAULT_SETTINGS;
+    const baseFolder = normalizePath(pluginSettings.DailyNoteCreateBaseFolder || dailyNotesSetting.folder || '');
+    const yearFormat = pluginSettings.DailyNoteCreateYearFormat || DEFAULT_SETTINGS.DailyNoteCreateYearFormat;
+    const monthFormat = pluginSettings.DailyNoteCreateMonthFormat || DEFAULT_SETTINGS.DailyNoteCreateMonthFormat;
+    const yearFolderName = date.format(yearFormat);
+    const monthFolderName = date.format(monthFormat);
+    const yearFolder = normalizePath(baseFolder ? `${baseFolder}/${yearFolderName}` : yearFolderName);
     await this.ensureFolderExists(yearFolder);
-    const monthFolder = normalizePath(`${yearFolder}/${date.format('YYYY-MM')}`);
+    const monthFolder = normalizePath(`${yearFolder}/${monthFolderName}`);
     await this.ensureFolderExists(monthFolder);
 
     const format = dailyNotesSetting.format || 'YYYY-MM-DD';

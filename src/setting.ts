@@ -10,6 +10,9 @@ export interface BigCalendarSettings {
   ProcessEntriesBelow: string;
   VisibleStartTime: string;
   VisibleEndTime: string;
+  DailyNoteCreateBaseFolder: string;
+  DailyNoteCreateYearFormat: string;
+  DailyNoteCreateMonthFormat: string;
 }
 
 const CLOCK_TIME_PATTERN = /^([01]\d|2[0-3]):([0-5]\d)$/;
@@ -21,6 +24,9 @@ export const DEFAULT_SETTINGS: BigCalendarSettings = {
   DefaultEventComposition: '{TIME} {CONTENT}',
   VisibleStartTime: '08:00',
   VisibleEndTime: '21:00',
+  DailyNoteCreateBaseFolder: '',
+  DailyNoteCreateYearFormat: 'YYYY',
+  DailyNoteCreateMonthFormat: 'YYYY-MM',
 };
 
 export const isClockTime = (value: string): boolean => CLOCK_TIME_PATTERN.test(value);
@@ -45,6 +51,12 @@ export const normalizeVisibleTimeSettings = (settings: BigCalendarSettings): Big
     nextSettings.VisibleStartTime = DEFAULT_SETTINGS.VisibleStartTime;
     nextSettings.VisibleEndTime = DEFAULT_SETTINGS.VisibleEndTime;
   }
+
+  nextSettings.DailyNoteCreateBaseFolder = (nextSettings.DailyNoteCreateBaseFolder || '').trim();
+  nextSettings.DailyNoteCreateYearFormat =
+    (nextSettings.DailyNoteCreateYearFormat || '').trim() || DEFAULT_SETTINGS.DailyNoteCreateYearFormat;
+  nextSettings.DailyNoteCreateMonthFormat =
+    (nextSettings.DailyNoteCreateMonthFormat || '').trim() || DEFAULT_SETTINGS.DailyNoteCreateMonthFormat;
 
   return nextSettings;
 };
@@ -145,5 +157,46 @@ export class BigCalendarSettingTab extends PluginSettingTab {
             this.applySettingsUpdate();
           });
       });
+
+    new Setting(containerEl).setHeading().setName(t('Daily note creation'));
+
+    new Setting(containerEl)
+      .setName(t('Daily note base folder'))
+      .setDesc(t('Folder where new daily notes are created. Leave empty to use the Obsidian daily notes folder.'))
+      .addText((text) =>
+        text
+          .setPlaceholder('01-个人事务/1.8-每日记录')
+          .setValue(this.plugin.settings.DailyNoteCreateBaseFolder)
+          .onChange(async (value) => {
+            this.plugin.settings.DailyNoteCreateBaseFolder = value;
+            this.applySettingsUpdate();
+          }),
+      );
+
+    new Setting(containerEl)
+      .setName(t('Year folder format'))
+      .setDesc(t('Moment format for the year folder under the base folder.'))
+      .addText((text) =>
+        text
+          .setPlaceholder(DEFAULT_SETTINGS.DailyNoteCreateYearFormat)
+          .setValue(this.plugin.settings.DailyNoteCreateYearFormat)
+          .onChange(async (value) => {
+            this.plugin.settings.DailyNoteCreateYearFormat = value;
+            this.applySettingsUpdate();
+          }),
+      );
+
+    new Setting(containerEl)
+      .setName(t('Month folder format'))
+      .setDesc(t('Moment format for the month folder under the year folder.'))
+      .addText((text) =>
+        text
+          .setPlaceholder(DEFAULT_SETTINGS.DailyNoteCreateMonthFormat)
+          .setValue(this.plugin.settings.DailyNoteCreateMonthFormat)
+          .onChange(async (value) => {
+            this.plugin.settings.DailyNoteCreateMonthFormat = value;
+            this.applySettingsUpdate();
+          }),
+      );
   }
 }
