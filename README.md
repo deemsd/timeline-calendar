@@ -2,7 +2,8 @@
 
 Timeline Calendar is an Obsidian calendar plugin for daily notes and tasks. It provides month, week, day, and agenda views, with a cleaner timeline layout where time labels align with the grid lines.
 
-<img width="1609" height="864" alt="截屏2026-06-03 14 09 15" src="https://github.com/user-attachments/assets/9f3ac907-0905-4fb1-ad08-b1176a6a95b9" />
+<img width="1112" height="714" alt="截屏2026-06-18 15 08 15" src="https://github.com/user-attachments/assets/e4e3c359-cde8-4e4a-8dd2-36ea82c05dbe" />
+
 
 
 ## Features
