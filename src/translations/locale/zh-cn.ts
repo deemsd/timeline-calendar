@@ -21,7 +21,7 @@ export default {
   'Daily note creation': 'Daily note 创建规则',
   'Daily note base folder': 'Daily note 基础文件夹',
   'Folder where new daily notes are created. Leave empty to use the Obsidian daily notes folder.':
-    '新建 daily note 时使用的基础文件夹。留空则使用 Obsidian 日记插件中的文件夹。',
+    '从此文件夹及所有子文件夹读取日程，并在其年月子文件夹中新建日记。留空则使用 Obsidian 日记插件中的文件夹。',
   'Year folder format': '年份文件夹格式',
   'Moment format for the year folder under the base folder.': '基础文件夹下的年份文件夹格式，使用 Moment 格式。',
   'Month folder format': '月份文件夹格式',

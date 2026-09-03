@@ -24,7 +24,7 @@ export default {
   'Daily note creation': 'Daily note creation',
   'Daily note base folder': 'Daily note base folder',
   'Folder where new daily notes are created. Leave empty to use the Obsidian daily notes folder.':
-    'Folder where new daily notes are created. Leave empty to use the Obsidian daily notes folder.',
+    'Read daily notes recursively from this folder and create new notes in its year/month folders. Leave empty to use the Obsidian daily notes folder.',
   'Year folder format': 'Year folder format',
   'Moment format for the year folder under the base folder.':
     'Moment format for the year folder under the base folder.',

@@ -1,10 +1,10 @@
 import useFileStore from '@/stores/fileStore';
 import {
-  getAllDailyNotes,
   getDailyNote,
   getDailyNoteSettings,
   getTemplateInfo,
 } from 'obsidian-daily-notes-interface';
+import {getAllDailyNotes, getCalendarDailyNoteFolder} from '@/utils/calendarDailyNotes';
 import {DEFAULT_SETTINGS} from '@/setting';
 import globalService from '@/services/globalService';
 import {App, normalizePath, TFile} from 'obsidian';
@@ -85,9 +85,7 @@ class FileService {
    * @returns Path to the daily notes folder
    */
   public getDailyNotePath(): string {
-    const dailyNotesSetting = getDailyNoteSettings();
-    const dailyNotePath = dailyNotesSetting.folder;
-    return dailyNotePath;
+    return getCalendarDailyNoteFolder();
   }
 
   private async getMonthlyDailyNotePath(date: moment.Moment): Promise<string> {

@@ -1,5 +1,6 @@
 import {TFolder, TFile, Notice, App} from 'obsidian';
-import {getAllDailyNotes, getDailyNoteSettings, getDateFromFile} from 'obsidian-daily-notes-interface';
+import {getDateFromFile} from 'obsidian-daily-notes-interface';
+import {getAllDailyNotes, getCalendarDailyNoteFolder} from '@/utils/calendarDailyNotes';
 import {getAllLinesFromFile} from '@/utils/fileParser';
 import {fileService, globalService} from '@/services';
 import {t} from '@/translations/helper';
@@ -111,7 +112,7 @@ export async function getEventsFromDailyNote(
 export async function getEvents(app: App): Promise<Model.Event[]> {
   return await safeExecute(async () => {
     const allEvents: Model.Event[] = [];
-    const {folder} = getDailyNoteSettings();
+    const folder = getCalendarDailyNoteFolder();
 
     if (!app) return [];
 

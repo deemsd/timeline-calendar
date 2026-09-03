@@ -1,5 +1,6 @@
 import {moment, TFile, Vault} from 'obsidian';
-import {getAllDailyNotes, getDailyNote} from 'obsidian-daily-notes-interface';
+import {getDailyNote} from 'obsidian-daily-notes-interface';
+import {getAllDailyNotes} from '@/utils/calendarDailyNotes';
 import {stringOrDate} from 'react-big-calendar';
 import {getAllLinesFromFile, safeExecute} from '@/api';
 import fileService from '@/services/fileService';

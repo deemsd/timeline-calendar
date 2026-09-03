@@ -139,6 +139,11 @@ export const PATTERNS = {
   BLOCK_LINK: /\s\^([a-zA-Z0-9-]+)$/,
 };
 
+function resetPattern(pattern: RegExp): RegExp {
+  pattern.lastIndex = 0;
+  return pattern;
+}
+
 /**
  * Extracts start and end times from a line
  *
@@ -149,7 +154,7 @@ export function extractTimes(line: string): {startTime?: TimeInfo; endTime?: Tim
   const result: {startTime?: TimeInfo; endTime?: TimeInfo} = {};
 
   // First, check for time range format (HH:MM-HH:MM)
-  const timeRangeMatches = [...line.matchAll(PATTERNS.TIME_RANGE)];
+  const timeRangeMatches = [...line.matchAll(resetPattern(PATTERNS.TIME_RANGE))];
   if (timeRangeMatches.length > 0) {
     const match = timeRangeMatches[0];
     result.startTime = {
@@ -168,7 +173,7 @@ export function extractTimes(line: string): {startTime?: TimeInfo; endTime?: Tim
   }
 
   // Extract end time (prioritize)
-  const endTimeMatch = [...line.matchAll(PATTERNS.END_TIME)][0];
+  const endTimeMatch = [...line.matchAll(resetPattern(PATTERNS.END_TIME))][0];
   if (endTimeMatch) {
     result.endTime = {
       hour: parseInt(endTimeMatch[1]),
@@ -179,7 +184,7 @@ export function extractTimes(line: string): {startTime?: TimeInfo; endTime?: Tim
   }
 
   // Extract start time - first check for time tag
-  const timeTagMatches = [...line.matchAll(PATTERNS.TIME_WITH_TAG)];
+  const timeTagMatches = [...line.matchAll(resetPattern(PATTERNS.TIME_WITH_TAG))];
   if (timeTagMatches.length > 0) {
     const match = timeTagMatches[0];
     result.startTime = {
@@ -190,7 +195,7 @@ export function extractTimes(line: string): {startTime?: TimeInfo; endTime?: Tim
     };
   } else {
     // Check for standard time format
-    const standardTimeMatches = [...line.matchAll(PATTERNS.TIME_STANDARD)];
+    const standardTimeMatches = [...line.matchAll(resetPattern(PATTERNS.TIME_STANDARD))];
     if (standardTimeMatches.length > 0) {
       // Use the first time as start time (if it's not the same as end time)
       const match = standardTimeMatches[0];
@@ -334,7 +339,10 @@ export function cleanContent(content: string, dates: DateInfo[], recurrenceRule?
   result = result.replace(/⏲\s?\d{1,2}:\d{2}(:\d{2})?/g, '');
 
   // Remove trailing time range (e.g. "任务名 10:00-10:30" → "任务名")
-  result = result.replace(/\s\d{1,2}:\d{2}-\d{1,2}:\d{2}/g, '');
+  result = result.replace(/\s?\d{1,2}:\d{2}-\d{1,2}:\d{2}/g, '');
+
+  // Remove standalone inline start times (e.g. "任务名10:00" or "任务名 10:00").
+  result = result.replace(/\s?\d{1,2}:\d{2}(?=\s|$)/g, '');
 
   // Clean up any excess whitespace
   return result.trim();
@@ -437,10 +445,10 @@ export function lineContainsParseBelowToken(line: string, settings: BigCalendarS
 export function lineContainsTime(line: string): boolean {
   // Check if line contains time information or is a task
   return (
-    PATTERNS.TIME_STANDARD.test(line) ||
-    PATTERNS.TIME_WITH_TAG.test(line) ||
-    PATTERNS.END_TIME.test(line) ||
-    PATTERNS.TASK.test(line)
+    resetPattern(PATTERNS.TIME_STANDARD).test(line) ||
+    resetPattern(PATTERNS.TIME_WITH_TAG).test(line) ||
+    resetPattern(PATTERNS.END_TIME).test(line) ||
+    resetPattern(PATTERNS.TASK).test(line)
   );
 }
 
@@ -458,6 +466,10 @@ export function convertToEvent(
   lineIndex: number,
   path: string,
 ): Model.Event | null {
+  if (parsedLine.isListItem && parsedLine.indentation.length > 0) {
+    return null;
+  }
+
   // Determine if it's a task
   const isTask = parsedLine.isTask;
 
@@ -523,15 +535,8 @@ export function convertToEvent(
       endDate = startDate.clone().add(30, 'minutes');
     }
 
-    // If due date was used, ensure it includes time
-    if (hasDueDate && startTime) {
-      if (!parsedLine.endTime) {
-        // If no end time was specified, keep the same time as start
-        endDate.hour(startTime.hour);
-        endDate.minute(startTime.minute);
-        endDate.second(startTime.second || 0);
-      }
-    }
+    // Due dates choose the event date; they should not collapse a single
+    // start time back to a zero-length event.
   }
 
   // Generate unique ID

@@ -2,7 +2,8 @@ import {App, TFile, moment} from 'obsidian';
 import fileService from '../services/fileService';
 import {stringOrDate} from 'react-big-calendar';
 import {createTimeRegex, getAllLinesFromFile, extractEventTime, safeExecute} from '../api';
-import {getDailyNote, getAllDailyNotes} from 'obsidian-daily-notes-interface';
+import {getDailyNote} from 'obsidian-daily-notes-interface';
+import {getAllDailyNotes} from '@/utils/calendarDailyNotes';
 import globalService from '../services/globalService';
 import {getMarkBasedOnEvent} from './parser';
 
@@ -455,6 +456,8 @@ function cleanEventContent(originalContent: string, content: string): string {
   cleanContent = cleanContent.replace(/✅\s?\d{4}-\d{2}-\d{2}/g, '').trim();
   // Remove any time range patterns (HH:MM-HH:MM, with or without leading space)
   cleanContent = cleanContent.replace(/\s?\d{1,2}:\d{2}-\d{1,2}:\d{2}/g, '').trim();
+  // Remove standalone inline start times such as "任务名 18:00".
+  cleanContent = cleanContent.replace(/\s?\d{1,2}:\d{2}(?=\s|$)/g, '').trim();
   // Remove start date emoji
   cleanContent = cleanContent.replace(/🛫\s?\d{4}-\d{2}-\d{2}/g, '').trim();
 
@@ -474,6 +477,8 @@ function cleanEventContent(originalContent: string, content: string): string {
       .replace(/🛫\s?\d{4}-\d{2}-\d{2}/g, '')
       .trim()
       .replace(/\s?\d{1,2}:\d{2}-\d{1,2}:\d{2}/g, '')
+      .trim()
+      .replace(/\s?\d{1,2}:\d{2}(?=\s|$)/g, '')
       .trim();
   }
 

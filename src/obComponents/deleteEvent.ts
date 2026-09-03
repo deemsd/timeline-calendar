@@ -1,6 +1,7 @@
 import {TFile, normalizePath, Notice} from 'obsidian';
 import {moment} from 'obsidian';
-import {getAllDailyNotes, getDailyNote} from 'obsidian-daily-notes-interface';
+import {getDailyNote} from 'obsidian-daily-notes-interface';
+import {getAllDailyNotes} from '@/utils/calendarDailyNotes';
 import {insertAfterHandler} from './createEvent';
 import fileService from '../services/fileService';
 import {getAllLinesFromFile, getDailyNotePath, safeExecute} from '../api';
